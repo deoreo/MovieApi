@@ -1,0 +1,34 @@
+﻿@MovieApi_HostAddress = https://localhost:7090
+
+GET {{MovieApi_HostAddress}}/movie/get
+
+###
+
+POST {{MovieApi_HostAddress}}/movie/create
+Content-Type: application/json
+
+{
+  "Title": "walk cat",
+  "ReleaseDate": "2024-09-20",
+  "Rating": 3.5
+}
+
+###
+
+PUT {{MovieApi_HostAddress}}/movie/update/1
+Content-Type: application/json
+{
+    "Title" : "walk cat",
+    "ReleaseDate": "2024-08-20",
+    "Rating" : 3.5
+}
+
+###
+
+GET {{MovieApi_HostAddress}}/movie/get/2
+
+###
+
+DELETE {{MovieApi_HostAddress}}/movie/delete/2
+
+###
