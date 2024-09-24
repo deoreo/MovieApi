@@ -19,7 +19,7 @@ todoItems.MapGet("/get", GetAllMovies);
 todoItems.MapGet("/get/{id}", GetMovie);
 todoItems.MapPost("/create", CreateMovie);
 todoItems.MapPut("/update/{id}", UpdateMovie);
-todoItems.MapDelete("/delete/{id}", DeleteMovie);
+todoItems.MapPut("/delete/{id}", DeleteMovie);
 
 app.Run();
 
@@ -70,7 +70,7 @@ static async Task<IResult> DeleteMovie(int id, MovieDb db)
 {
     if (await db.Movies.FindAsync(id) is Movie movie)
     {
-        db.Movies.Remove(movie);
+        movie.IsDeleted = true;
         await db.SaveChangesAsync();
         return TypedResults.NoContent();
     }

@@ -8,6 +8,11 @@ namespace MovieApi
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Movie>().HasQueryFilter(m => m.IsDeleted == false);
+        }
+
         public DbSet<Movie> Movies { get; set; }
     }
 }

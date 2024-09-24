@@ -18,9 +18,9 @@ Content-Type: application/json
 PUT {{MovieApi_HostAddress}}/movie/update/1
 Content-Type: application/json
 {
-    "Title" : "walk cat",
+    "Title" : "walk bird",
     "ReleaseDate": "2024-08-20",
-    "Rating" : 3.5
+    "Rating" : 3.9
 }
 
 ###
@@ -29,6 +29,6 @@ GET {{MovieApi_HostAddress}}/movie/get/2
 
 ###
 
-DELETE {{MovieApi_HostAddress}}/movie/delete/2
+PUT {{MovieApi_HostAddress}}/movie/delete/5
 
 ###
