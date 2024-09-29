@@ -1,6 +1,8 @@
 ﻿@MovieApi_HostAddress = https://localhost:7090
 
 GET {{MovieApi_HostAddress}}/movie/get
+Authorization : Bearer CfDJ8KnTluBzrRNHtn7p1hJHMZ4ceUbXe-SKm_muww1zUgOCxGFv3xoPwX4h2VW6zqBieBXsUsCOeJfKksc2Th5_USUMyPS0JcXvCL_t-WatsbTYeF9-2T0BDgpiD_VFX5sTK85GSm-GdSqgurMD79aaCdR3sNktdctonTkQFtLxiGhc7agiL_bdPTKqgZ79YECcRKFPChbxICTd7iZFFojnnZ9q6c_y3vMrn08dcfFXKgpKYkxvzZm2hI_0_I4n-Zo5sG-k1i02IY_rlWKY7byo0pyG2iqnn-tqlkajFUZUCYw31ex2qE-hTDuazfNNvzjRmJB8e7uyUQqyu6fkyjF-Ic-1GJe2AVZm7VG5oA1fVecLtYEvQWKD8qBBDapZ0UOqL9nYbCxBke12WiQItTpnETVPVBko5zGH-kqTv9PPYUS1LIvjre_ikVdcPDk4ZkYQ2B1fMhf6UGmblTJu3NrWxQhUEmZIeX9oWmo43CynyvRTkgYqZ-_PMSXLHIUyJEq_8Rv-mbyIo3uaLVMZ5YrU3kX_4Qhq4KOVoZqO-DO8lz4wRzDZH1bTOrhV-xcJCVVBME4VJEL_x36_WDXCD_OO5_Kmc5ZFNgVxASNs6m5Qg_Pq3ZjSTYXRJM-FXPsTO3ynSmhPI-TWHVkgE52gMvNf61quxmF3sZBoYEfvXeI6dk79E4kUIBZ9uVAckdSIsE7C3A
+Accept: application/json
 
 ###
 
@@ -8,7 +10,7 @@ POST {{MovieApi_HostAddress}}/movie/create
 Content-Type: application/json
 
 {
-  "Title": "walk cat",
+  "Title": "walk ms",
   "ReleaseDate": "2024-09-20",
   "Rating": 3.5
 }
@@ -25,10 +27,32 @@ Content-Type: application/json
 
 ###
 
-GET {{MovieApi_HostAddress}}/movie/get/2
+GET {{MovieApi_HostAddress}}/movie/get/7
 
 ###
 
 PUT {{MovieApi_HostAddress}}/movie/delete/5
+
+###
+
+POST {{MovieApi_HostAddress}}/register
+Content-Type: application/json
+{
+  "email": "admin@test.com",
+  "password": "test-123Admin"
+}
+
+###
+
+POST {{MovieApi_HostAddress}}/login
+Content-Type: application/json
+{
+  "email": "admin@test.com",
+  "password": "test-123Admin"
+  
+}
+###
+
+POST {{MovieApi_HostAddress}}/logout
 
 ###

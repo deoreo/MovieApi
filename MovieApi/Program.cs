@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MovieApi;
 
@@ -11,18 +13,39 @@ builder.Services.AddDbContext<MovieDb>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+});
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<MovieDb>();
+
 var app = builder.Build();
 
-var todoItems = app.MapGroup("/movie");
+app.MapIdentityApi<IdentityUser>();
+app.MapPost("/logout", Logout).RequireAuthorization();
 
-todoItems.MapGet("/get", GetAllMovies);
-todoItems.MapGet("/get/{id}", GetMovie);
-todoItems.MapPost("/create", CreateMovie);
-todoItems.MapPut("/update/{id}", UpdateMovie);
-todoItems.MapPut("/delete/{id}", DeleteMovie);
+var movieItems = app.MapGroup("/movie");
+
+movieItems.MapGet("/get", GetAllMovies).RequireAuthorization();
+movieItems.MapGet("/get/{id}", GetMovie).RequireAuthorization();
+movieItems.MapPost("/create", CreateMovie).RequireAuthorization();
+movieItems.MapPut("/update/{id}", UpdateMovie).RequireAuthorization();
+movieItems.MapPut("/delete/{id}", DeleteMovie).RequireAuthorization();
+
+app.UseAuthorization();
 
 app.Run();
 
+static async Task<IResult> Logout(SignInManager<IdentityUser> signInManager, [FromBody] object empty)
+{
+    if (empty != null)
+    {
+        await signInManager.SignOutAsync();
+        return Results.Ok();
+    }
+    return Results.Unauthorized();
+}
 static async Task<IResult> GetAllMovies(MovieDb db)
 {
     return TypedResults.Ok(await db.Movies.Select(x => new MovieDTO(x)).ToArrayAsync());
